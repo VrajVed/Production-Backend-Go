@@ -1,0 +1,33 @@
+{
+  "name": "prod-backend-go",
+  "version": "1.0.0",
+  "description": "A production ready backend system written in go with many backend concepts such as MVC architecture, concurrency, producer consumer architecture, logging, monitoring, caching etc.",
+  "main": "index.js",
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "format:check": "turbo run format:check",
+    "format:fix": "turbo run format:fix",
+    "lint": "turbo run lint",
+    "lint:fix": "turbo run lint:fix",
+    "typecheck": "turbo run typecheck",
+    "clean": "turbo run clean && rimraf node_modules"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VrajVed/Production-Backend-Go.git"
+  },
+  "packageManager": "bun@1.2.13",
+  "engines": {
+    "node": ">=22"
+  },
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  },
+  "devDependencies": {
+    "turbo": "^2.9.18",
+    "typescript": "^6.0.3"
+  }
+}
