@@ -19,9 +19,9 @@ tasks:
     internal: true
 
   run:
-    desc: run the cmd/go-boilerplate application
+    desc: run the cmd/prod-backend-go application
     cmds:
-    - go run ./cmd/go-boilerplate
+    - go run ./cmd/prod-backend-go
 
   migrations:new:
     desc: create a new database migration
