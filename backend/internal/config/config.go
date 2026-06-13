@@ -74,7 +74,7 @@ func LoadConfig() (*Config, error) {
 		logger.Fatal().Err(err).Msg("failed to unmarshal config")
 	}
 
-	validate := validator.New(mainConfig)
+	validate := validator.New()
 
 	err = validate.Struct(mainConfig)
 	if err != nil {
