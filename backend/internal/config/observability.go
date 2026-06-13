@@ -3,7 +3,7 @@ package config
 import (
 	"fmt"
 	"time"
-)
+) 
 
 type ObservabilityConfig struct {
 	ServiceName  string             `koanf:"service_name" validate:"required"`

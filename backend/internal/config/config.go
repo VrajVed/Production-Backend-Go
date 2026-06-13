@@ -11,11 +11,12 @@ import (
 )
 
 type Config struct {
-	Primary  Primary        `koanf:"primary" validate:"required"`
-	Server   ServerConfig   `koanf:"server" validate:"required"`
-	Database DatabaseConfig `koanf:"database" validate:"required"`
-	Auth     AuthConfig     `koanf:"auth" validate:"required"`
-	Redis    RedisConfig    `koanf:"redis" validate:"required"`
+	Primary       Primary              `koanf:"primary" validate:"required"`
+	Server        ServerConfig         `koanf:"server" validate:"required"`
+	Database      DatabaseConfig       `koanf:"database" validate:"required"`
+	Auth          AuthConfig           `koanf:"auth" validate:"required"`
+	Redis         RedisConfig          `koanf:"redis" validate:"required"`
+	Observability *ObservabilityConfig `koanf:"observability" validate:"required"`
 }
 
 type Primary struct {
@@ -78,6 +79,17 @@ func LoadConfig() (*Config, error) {
 	err = validate.Struct(mainConfig)
 	if err != nil {
 		logger.Fatal().Err(err).Msg("failed to validate config")
+	}
+
+	if mainConfig.Observability == nil {
+		mainConfig.Observability = DefaultObservabilityConfig()
+	}
+
+	mainConfig.Observability.ServiceName = "boilerplate"
+	mainConfig.Observability.Environment = mainConfig.Primary.Env
+
+	if err := mainConfig.Observability.Validate(); err != nil {
+		logger.Fatal().Err(err).Msg("failed to validate observability config")
 	}
 
 	return mainConfig, nil
